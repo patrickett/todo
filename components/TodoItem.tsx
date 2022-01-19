@@ -8,6 +8,8 @@ import { TodoDataManager, TodoItemData } from "../types/todo";
 // tags
 // complete, edit, delete
 
+type Color = "green" | "red" | "yellow";
+
 interface TodoItemProps {
   todoItem: TodoItemData;
   todos: TodoItemData[];
@@ -54,9 +56,16 @@ export default function TodoItem({
       (t) => t.text === text && t.createdAt === createdAt
     );
     const todo = tempArray[todoIndex];
-    console.log(todo);
     openModal(todo);
   };
+
+  const baseButtonCSS =
+    "w-full justify-center text-base bg-transparent rounded-md flex items-center py-2 border border-gray-700 mx-1 outline-none hover:shadow-lg transition";
+
+  const green = "green";
+
+  const buttonHighlight = (color: Color) =>
+    `focus:bg-${color}-50 focus:text-${color}-500 focus:border-${color}-500 hover:bg-${color}-50 hover:text-${color}-500 hover:border-${color}-500`;
 
   return (
     <div className="w-full">
@@ -83,7 +92,7 @@ export default function TodoItem({
           </ul>
         </div>
 
-        {/* NOTE: I know these are terrible buttons - in theory I should extract to a component. but colors were giving me a a hassle */}
+        {/* NOTE: I extracted these to buttons. they sometime render properly cant determine if its bad next cache */}
 
         {completed ? null : (
           <div className="flex justify-end mt-4">
@@ -91,27 +100,7 @@ export default function TodoItem({
               onClick={setComplete}
               aria-label="Mark Todo Complete"
               title="Complete"
-              className="
-     w-full
-     justify-center
-     text-base
-     bg-transparent
-     rounded-md
-     flex
-     items-center
-     py-2
-     border
-     border-gray-700
-     mx-1
-     outline-none
-     hover:shadow-lg
-     transition
-     focus:bg-green-50
-     focus:text-green-500
-     focus:border-green-500
-     hover:bg-green-50
-     hover:text-green-500
-     hover:border-green-500"
+              className={`${baseButtonCSS} ${buttonHighlight("green")}`}
             >
               <CheckCircleFill />
             </button>
@@ -119,27 +108,7 @@ export default function TodoItem({
               onClick={editTodo}
               aria-label="Edit Todo"
               title="Edit"
-              className="
-     w-full
-     justify-center
-     text-base
-     bg-transparent
-     rounded-md
-     flex
-     hover:shadow-lg
-     items-center
-     py-2
-     border
-     border-gray-700
-     mx-1
-     outline-none
-     transition
-     focus:bg-yellow-50
-     focus:text-yellow-500
-     focus:border-yellow-500
-     hover:bg-yellow-50
-     hover:text-yellow-500
-     hover:border-yellow-500"
+              className={`${baseButtonCSS} ${buttonHighlight("yellow")}`}
             >
               <PencilSquare />
             </button>
@@ -147,27 +116,7 @@ export default function TodoItem({
               onClick={setDeleted}
               aria-label="Delete Todo"
               title="Delete"
-              className="
-     w-full
-     justify-center
-     text-base
-     bg-transparent
-     rounded-md
-     flex
-     items-center
-     py-2
-     hover:shadow-lg
-     border
-     border-gray-700
-     mx-1
-     transition
-     outline-none
-     focus:bg-red-50
-     focus:text-red-500
-     focus:border-red-500
-     hover:bg-red-50
-     hover:text-red-500
-     hover:border-red-500"
+              className={`${baseButtonCSS} ${buttonHighlight("red")}`}
             >
               <Trash />
             </button>
