@@ -1,3 +1,16 @@
+## Incomplete Features/Tasks
+
+- [ ] Make not completed cards draggable
+- [ ] dark mode
+- [ ] on add tag, add all tags to a tagsAutocomplete SET (this can be used autocomplete later)
+- [ ] better transitions / framer animations
+- [ ] better accessability
+- [ ] better tab navigation
+- [ ] scrollbar auto ajustment
+- [ ] lack of autocomplete for tags
+- [ ] restoring old todos
+- [ ] automatically enter first tag if create pressed
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
