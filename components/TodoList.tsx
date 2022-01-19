@@ -28,26 +28,24 @@ export default function TodoList() {
   // This is done according to https://github.com/reactjs/react-tabs#resetidcounter-void
   resetIdCounter();
 
-  const defaultManager: TodoDataManager = {
-    deleted: [],
-    tags: new Set([]),
-    todos: [],
-  };
-
   const { getItem, setItem } = useStorage();
 
   const maybeManager = getItem<TodoDataManager>("manager", "local");
   const manager =
     maybeManager && typeof maybeManager !== "string"
       ? maybeManager
-      : defaultManager;
+      : {
+          deleted: [],
+          tags: new Set([]),
+          todos: [],
+        };
 
   const [todos, setTodos] = useState(manager.todos);
 
   const updateTodos = (todos: TodoItemData[]) => {
     manager.todos = todos;
     setItem("manager", manager);
-    setTodos(todos);
+    setTodos([...todos]);
   };
 
   const [modalIsOpen, setIsOpen] = useState(false);
